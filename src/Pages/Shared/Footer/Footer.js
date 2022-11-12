@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import footer from '../../../assets/images/footer.png';
 
 const Footer = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+
   return (
     <footer
       className=" p-10 "
@@ -35,7 +38,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="pt-8 text-sm text-center ">
-        <p>Copyright © 2022 - All right reserved by ACME Industries Ltd</p>
+        <p>Copyright © {year} - All right reserved by ACME Industries Ltd</p>
       </div>
     </footer>
   );
