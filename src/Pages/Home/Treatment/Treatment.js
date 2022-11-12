@@ -1,28 +1,29 @@
 import React from 'react';
 import treatment from '../../../assets/images/treatment.png';
+import PrimaryButton from '../../../components/PrimaryButton/PrimaryButton';
 
 const Treatment = () => {
   return (
-    <div className="card lg:card-side shadow-xl">
-      <figure>
-        <img src={treatment} className="h-fit" alt="Album" />
-      </figure>
-
-      <div className="card-body lg:w-1/2 pl-20">
-        <h2 className="card-title text-5xl font-bold">
-          Exceptional Dental <br /> Care, on Your Terms
-        </h2>
-        <p className="flex-grow-0 py-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam itaque
-          doloremque unde esse natus. Dolor laudantium cumque neque quaerat
-          consequatur eveniet at, consequuntur error. Expedita, id asperiores!
-          Quod, tenetur autem!50
-        </p>
-        <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white max-w-fit ">
-          Get Started
-        </button>
+    <section>
+      <div className="hero ">
+        <div className="hero-content flex-col lg:flex-row">
+          <img
+            src={treatment}
+            className="lg:w-1/2 rounded-lg shadow-2xl"
+            alt=""
+          />
+          <div>
+            <h1 className="text-5xl font-bold">Box Office News!</h1>
+            <p className="py-6">
+              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
+              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
+              et a id nisi.
+            </p>
+            <PrimaryButton>Treatment</PrimaryButton>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
