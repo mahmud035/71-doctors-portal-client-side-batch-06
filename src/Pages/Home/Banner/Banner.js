@@ -5,8 +5,8 @@ import bannerBg from '../../../assets/images/bg.png';
 
 const Banner = () => {
   return (
-    <div
-      className="hero"
+    <section
+      className="hero my-16"
       style={{
         background: `url(${bannerBg})`,
         backgroundSize: 'cover',
@@ -30,7 +30,7 @@ const Banner = () => {
           <PrimaryButton>GET STARTED</PrimaryButton>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

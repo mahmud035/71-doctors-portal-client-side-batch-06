@@ -29,11 +29,11 @@ const InfoCards = () => {
     },
   ];
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
       {cardData.map((card, index) => (
         <InfoCard key={index} card={card}></InfoCard>
       ))}
-    </div>
+    </section>
   );
 };
 

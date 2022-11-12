@@ -30,7 +30,7 @@ const Services = () => {
   ];
 
   return (
-    <div className="py-16">
+    <section className="py-16">
       <div className="text-center pb-10">
         <h3 className="text-xl text-primary font-bold">OUR SERVICES</h3>
         <h2 className="text-3xl">Services We Provide</h2>
@@ -41,7 +41,7 @@ const Services = () => {
           <ServiceCard key={index} service={service}></ServiceCard>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
