@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import AppointmentOptionCard from './AppointmentOptionCard';
+import BookingModal from '../BookingModal/BookingModal';
 
 const AvailableAppointments = ({ selectedDate }) => {
   const [appointmentOptions, setAppointmentOptions] = useState([]);
+  const [treatment, setTreatment] = useState(null);
 
   useEffect(() => {
     fetch('appointmentOptions.json')
@@ -11,7 +13,7 @@ const AvailableAppointments = ({ selectedDate }) => {
       .then((data) => setAppointmentOptions(data));
   }, []);
 
-  console.log(appointmentOptions);
+  console.log(treatment);
 
   return (
     <section>
@@ -24,9 +26,12 @@ const AvailableAppointments = ({ selectedDate }) => {
           <AppointmentOptionCard
             key={index}
             appointmentOption={option}
+            setTreatment={setTreatment}
           ></AppointmentOptionCard>
         ))}
       </div>
+
+      {treatment && <BookingModal treatment={treatment}></BookingModal>}
     </section>
   );
 };
