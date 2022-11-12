@@ -1,7 +1,12 @@
 import React from 'react';
+import { format } from 'date-fns';
 
-const BookingModal = ({ treatment }) => {
-  const { name } = treatment;
+const BookingModal = ({ treatment, selectedDate }) => {
+  //* treatment is => Appointment Option(object). Just different name
+  console.log(treatment);
+
+  const { name, slots } = treatment;
+  const date = format(selectedDate, 'PP');
 
   return (
     <>
@@ -14,11 +19,43 @@ const BookingModal = ({ treatment }) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{name}</h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
+          <h3 className="text-lg font-bold pb-10">{name}</h3>
+          <form className="grid gap-4 grid-cols-1">
+            <input
+              defaultValue={date}
+              disabled
+              type="text"
+              className="input input-bordered w-full "
+            />
+
+            <select className="select select-bordered w-full ">
+              {slots.map((timeSlot, index) => (
+                <option key={index}>{timeSlot}</option>
+              ))}
+            </select>
+
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="input input-bordered w-full "
+            />
+
+            <input
+              type="number"
+              placeholder="Phone Number"
+              className="input input-bordered w-full "
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="input input-bordered w-full "
+            />
+            <input
+              type="submit"
+              value="Submit"
+              className="btn btn-accent w-full"
+            />
+          </form>
         </div>
       </div>
     </>

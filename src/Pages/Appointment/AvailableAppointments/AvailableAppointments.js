@@ -13,7 +13,7 @@ const AvailableAppointments = ({ selectedDate }) => {
       .then((data) => setAppointmentOptions(data));
   }, []);
 
-  console.log(treatment);
+  // console.log(treatment);
 
   return (
     <section>
@@ -31,7 +31,12 @@ const AvailableAppointments = ({ selectedDate }) => {
         ))}
       </div>
 
-      {treatment && <BookingModal treatment={treatment}></BookingModal>}
+      {treatment && (
+        <BookingModal
+          treatment={treatment}
+          selectedDate={selectedDate}
+        ></BookingModal>
+      )}
     </section>
   );
 };
