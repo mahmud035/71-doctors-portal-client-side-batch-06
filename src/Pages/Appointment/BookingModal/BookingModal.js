@@ -2,11 +2,23 @@ import React from 'react';
 import { format } from 'date-fns';
 
 const BookingModal = ({ treatment, selectedDate }) => {
-  //* treatment is => Appointment Option(object). Just different name
+  //* treatment is just another name of appointmentOption with _id, name, slots field
   console.log(treatment);
 
   const { name, slots } = treatment;
   const date = format(selectedDate, 'PP');
+
+  const handleBooking = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const selectedSlot = form.selectedSlot.value;
+    const name = form.name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+
+    console.log(date, selectedSlot, name, email, phone);
+  };
 
   return (
     <>
@@ -20,7 +32,8 @@ const BookingModal = ({ treatment, selectedDate }) => {
             ✕
           </label>
           <h3 className="text-lg font-bold pb-10">{name}</h3>
-          <form className="grid gap-4 grid-cols-1">
+
+          <form onSubmit={handleBooking} className="grid gap-4 grid-cols-1">
             <input
               defaultValue={date}
               disabled
@@ -28,28 +41,36 @@ const BookingModal = ({ treatment, selectedDate }) => {
               className="input input-bordered w-full "
             />
 
-            <select className="select select-bordered w-full ">
+            <select
+              name="selectedSlot"
+              className="select select-bordered w-full "
+            >
               {slots.map((timeSlot, index) => (
                 <option key={index}>{timeSlot}</option>
               ))}
             </select>
 
             <input
+              name="name"
               type="text"
               placeholder="Full Name"
               className="input input-bordered w-full "
             />
 
             <input
-              type="number"
-              placeholder="Phone Number"
-              className="input input-bordered w-full "
-            />
-            <input
+              name="email"
               type="email"
               placeholder="Email"
               className="input input-bordered w-full "
             />
+
+            <input
+              name="phone"
+              type="number"
+              placeholder="Phone Number"
+              className="input input-bordered w-full "
+            />
+
             <input
               type="submit"
               value="Submit"
