@@ -2,12 +2,12 @@
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCsYsz2ezrHSoXYwLK2VrlrTI6J2z13MGA',
-  authDomain: 'doctors-portal-client-si-27126.firebaseapp.com',
-  projectId: 'doctors-portal-client-si-27126',
-  storageBucket: 'doctors-portal-client-si-27126.appspot.com',
-  messagingSenderId: '219429203557',
-  appId: '1:219429203557:web:b4bf4283335a97a5f1608c',
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase
