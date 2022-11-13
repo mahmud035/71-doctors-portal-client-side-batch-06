@@ -11,8 +11,10 @@ const SignUp = () => {
 
   console.log(errors);
 
-  const handleSignUp = (data) => {
+  const handleSignUp = (data, e) => {
     console.log(data);
+
+    e.target.reset();
   };
 
   return (
@@ -59,7 +61,13 @@ const SignUp = () => {
                 required: 'Password is required',
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message:
+                    'Password must be at least 6 characters (one special case, one digit, one lowercase letter)',
+                },
+                pattern: {
+                  value: /(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
+                  message:
+                    'Password must be one special case, one digit, one lowercase letter',
                 },
               })}
               type="password"

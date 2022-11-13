@@ -11,8 +11,10 @@ const Login = () => {
 
   console.log(errors);
 
-  const handleLogin = (data) => {
+  const handleLogin = (data, e) => {
     console.log(data);
+
+    e.target.reset();
   };
 
   return (
