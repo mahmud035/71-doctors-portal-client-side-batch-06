@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
@@ -13,6 +16,18 @@ const SignUp = () => {
 
   const handleSignUp = (data, e) => {
     console.log(data);
+    const email = data.email;
+    const password = data.password;
+
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('User created successfully');
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(22, -2));
+      });
 
     e.target.reset();
   };
