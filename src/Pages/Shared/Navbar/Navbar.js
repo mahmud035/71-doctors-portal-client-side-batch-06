@@ -1,9 +1,23 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success('Sign-out successful');
+
+        navigate('/login');
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(22, -2));
+      });
+  };
 
   const menuItems = (
     <React.Fragment>
@@ -17,14 +31,14 @@ const Navbar = () => {
       <li>
         <Link to="/about">About</Link>
       </li>
-      <li>
-        <Link to="/reviews">Reviews</Link>
-      </li>
 
       {user?.email && user?.uid ? (
         <>
           <li>
-            <Link to="/login">Sign Out</Link>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link onClick={handleLogOut}>Sign Out</Link>
           </li>
         </>
       ) : (
