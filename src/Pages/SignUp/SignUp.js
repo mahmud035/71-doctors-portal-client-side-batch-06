@@ -10,7 +10,7 @@ const SignUp = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   console.log(errors);
@@ -46,6 +46,20 @@ const SignUp = () => {
       })
       .catch((error) => {
         toast.error(error.message);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('Logged in successfully');
+
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(22, -2));
       });
   };
 
@@ -125,7 +139,9 @@ const SignUp = () => {
         </p>
 
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+          CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );

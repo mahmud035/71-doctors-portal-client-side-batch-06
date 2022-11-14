@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -10,11 +10,12 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { user, signIn, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location?.state?.from?.pathname || '/';
+  console.log(from);
 
   console.log(errors);
 
@@ -30,8 +31,18 @@ const Login = () => {
         toast.success('Logged in successfully');
 
         e.target.reset();
+      })
+      .catch((error) => {
+        toast.error(error.message.slice(22, -2));
+      });
+  };
 
-        navigate(from, { replace: true });
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        toast.success('Logged in successfully');
       })
       .catch((error) => {
         toast.error(error.message.slice(22, -2));
@@ -100,7 +111,9 @@ const Login = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+          CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );
