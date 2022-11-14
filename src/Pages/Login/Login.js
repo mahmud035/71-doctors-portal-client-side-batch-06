@@ -49,6 +49,14 @@ const Login = () => {
       });
   };
 
+  //* INFO: SOLVED: If (user && user.uid) is found then redirect user to the page they wanted to go.
+
+  useEffect(() => {
+    if (user && user.uid) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate]);
+
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="w-96 p-7">
