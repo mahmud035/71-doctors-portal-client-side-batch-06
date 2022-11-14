@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { createUser } = useContext(AuthContext);
 
   console.log(errors);
 
@@ -24,12 +24,12 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success('User created successfully');
+
+        e.target.reset();
       })
       .catch((error) => {
         toast.error(error.message.slice(22, -2));
       });
-
-    e.target.reset();
   };
 
   return (
