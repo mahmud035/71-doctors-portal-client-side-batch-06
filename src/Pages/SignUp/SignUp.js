@@ -30,8 +30,8 @@ const SignUp = () => {
           displayName: data.name,
         };
 
-        navigate('/');
         handleUpdateUser(userInfo);
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);

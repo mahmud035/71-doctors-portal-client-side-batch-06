@@ -8,11 +8,13 @@ import AuthProvider from './context/AuthProvider';
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+// Create a client
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    {/* Provide the client to your App */}
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <App />
