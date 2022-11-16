@@ -11,7 +11,7 @@ const AppointmentOptionCard = ({ appointmentOption, setTreatment }) => {
         </h2>
         <p>{slots.length > 0 ? slots[0] : 'Try Another Day'}</p>
         <p>
-          {slots.length} {slots.length > 1 ? 'spaces' : 'space'} available
+          {slots.length} {slots.length > 1 ? 'slots' : 'slot'} available
         </p>
         <div className="card-actions justify-center mt-3">
           <label
