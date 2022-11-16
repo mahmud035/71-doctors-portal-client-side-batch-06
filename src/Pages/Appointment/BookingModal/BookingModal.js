@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { AuthContext } from '../../../context/AuthProvider';
 import toast from 'react-hot-toast';
 
-const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
+const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
   //* treatment is just another name of appointmentOption with _id, name, slots field
   console.log(treatment);
 
@@ -43,6 +43,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate }) => {
           //* Closed the Modal
           setTreatment(null);
           toast.success('Appointment Booked Successfully');
+          refetch();
         }
       })
       .catch((error) => {

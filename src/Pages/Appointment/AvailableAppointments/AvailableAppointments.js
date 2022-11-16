@@ -15,6 +15,7 @@ const AvailableAppointments = ({ selectedDate }) => {
     isError,
     data: appointmentOptions = [],
     error,
+    refetch,
   } = useQuery({
     queryKey: ['appointmentOptions', date],
     queryFn: async () => {
@@ -57,6 +58,7 @@ const AvailableAppointments = ({ selectedDate }) => {
           treatment={treatment}
           selectedDate={selectedDate}
           setTreatment={setTreatment}
+          refetch={refetch}
         ></BookingModal>
       )}
     </section>
