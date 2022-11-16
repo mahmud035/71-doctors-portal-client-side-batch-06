@@ -20,6 +20,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
     const email = user?.email;
     const phone = form.phone.value;
 
+    // Creating a booking object which will be POST to database
     const booking = {
       appointmentDate: date,
       treatmentName: name,
