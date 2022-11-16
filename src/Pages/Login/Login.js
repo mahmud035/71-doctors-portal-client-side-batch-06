@@ -20,10 +20,13 @@ const Login = () => {
   console.log(errors);
 
   const handleLogin = (data, e) => {
+    e.preventDefault();
+
     console.log(data);
     const email = data.email;
     const password = data.password;
 
+    //* Sign In
     signIn(email, password)
       .then((result) => {
         const user = result.user;

@@ -16,10 +16,13 @@ const SignUp = () => {
   console.log(errors);
 
   const handleSignUp = (data, e) => {
+    e.preventDefault();
+
     console.log(data);
     const email = data.email;
     const password = data.password;
 
+    //* Create User
     createUser(email, password)
       .then((result) => {
         const user = result.user;
@@ -30,6 +33,7 @@ const SignUp = () => {
           displayName: data.name,
         };
 
+        //* Update User Profile
         handleUpdateUser(userInfo);
         navigate('/');
       })
