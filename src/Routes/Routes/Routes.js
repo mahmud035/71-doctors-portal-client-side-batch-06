@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import DashboardLayout from '../../Layout/DashboardLayout';
 import Main from '../../Layout/Main';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
@@ -35,9 +36,15 @@ const router = createBrowserRouter([
     path: '/dashboard',
     element: (
       <PrivateRoutes>
-        <Dashboard></Dashboard>
+        <DashboardLayout></DashboardLayout>
       </PrivateRoutes>
     ),
+    children: [
+      {
+        path: '/dashboard',
+        element: <Dashboard></Dashboard>,
+      },
+    ],
   },
 ]);
 
