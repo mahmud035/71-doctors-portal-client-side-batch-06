@@ -13,12 +13,13 @@ const SignUp = () => {
   const { createUser, updateUser, googleSignIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log(errors);
+  // console.log(errors);
 
   const handleSignUp = (data, e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     console.log(data);
+    const name = data.name;
     const email = data.email;
     const password = data.password;
 
@@ -34,8 +35,14 @@ const SignUp = () => {
         };
 
         //* Update User Profile
-        handleUpdateUser(userInfo);
-        navigate('/');
+        updateUser(userInfo)
+          .then(() => {
+            //* Save user information to DataBase
+            saveUser(name, email);
+          })
+          .catch((error) => {
+            toast.error(error.message);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -43,13 +50,21 @@ const SignUp = () => {
       });
   };
 
-  const handleUpdateUser = (userInfo) => {
-    updateUser(userInfo)
-      .then(() => {
-        toast.success('Profile Updated');
-      })
-      .catch((error) => {
-        toast.error(error.message);
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    console.log(user);
+
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('SavedUser:', data);
+        navigate('/');
       });
   };
 

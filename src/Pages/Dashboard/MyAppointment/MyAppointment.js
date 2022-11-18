@@ -30,7 +30,7 @@ const MyAppointment = () => {
     return <div>{error.message}</div>;
   }
 
-  console.log(bookings);
+  // console.log(bookings);
 
   return (
     <div>
