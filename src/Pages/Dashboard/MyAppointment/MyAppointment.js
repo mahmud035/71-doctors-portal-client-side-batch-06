@@ -52,15 +52,13 @@ const MyAppointment = () => {
           </thead>
           <tbody>
             {bookings.map((booking, index) => (
-              <>
-                <tr className="hover" key={index}>
-                  <th>{index + 1}</th>
-                  <td>{booking?.patientName}</td>
-                  <td>{booking?.treatmentName}</td>
-                  <td>{booking?.appointmentDate}</td>
-                  <td>{booking?.selectedSlot}</td>
-                </tr>
-              </>
+              <tr className="hover" key={index}>
+                <th>{index + 1}</th>
+                <td>{booking?.patientName}</td>
+                <td>{booking?.treatmentName}</td>
+                <td>{booking?.appointmentDate}</td>
+                <td>{booking?.selectedSlot}</td>
+              </tr>
             ))}
           </tbody>
         </table>
