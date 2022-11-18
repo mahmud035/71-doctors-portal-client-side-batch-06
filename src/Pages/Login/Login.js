@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider';
+import useToken from '../../hooks/useToken';
 
 const Login = () => {
   const {
@@ -11,6 +12,11 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const { user, signIn, googleSignIn } = useContext(AuthContext);
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [token] = useToken(loginUserEmail);
+
+  console.log(loginUserEmail);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,6 +39,8 @@ const Login = () => {
         console.log(user);
         toast.success('Logged in successfully');
 
+        setLoginUserEmail(email);
+
         e.target.reset();
       })
       .catch((error) => {
@@ -52,13 +60,13 @@ const Login = () => {
       });
   };
 
-  //* INFO: SOLVED: If (user && user.uid) is found then redirect user to the page they wanted to go.
+  //* INFO: SOLVED: If (user && token) is found then redirect user to the page they wanted to go.
 
   useEffect(() => {
-    if (user && user.uid) {
+    if (user && token) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [user, from, token, navigate]);
 
   return (
     <div className="h-[800px] flex justify-center items-center">

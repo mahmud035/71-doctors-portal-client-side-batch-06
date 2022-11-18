@@ -17,15 +17,15 @@ const SignUp = () => {
   const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
 
+  console.log(createdUserEmail);
+
   if (token) {
     navigate('/');
   }
 
   // console.log(errors);
 
-  const handleSignUp = (data, e) => {
-    // e.preventDefault();
-
+  const handleSignUp = (data) => {
     console.log(data);
     const name = data.name;
     const email = data.email;
@@ -73,7 +73,7 @@ const SignUp = () => {
       .then((data) => {
         console.log('SavedUser:', data);
 
-        setCreatedUserEmail(data?.email);
+        setCreatedUserEmail(email);
       });
   };
 
