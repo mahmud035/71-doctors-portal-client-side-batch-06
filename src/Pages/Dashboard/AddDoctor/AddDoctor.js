@@ -36,6 +36,11 @@ const AddDoctor = () => {
 
   const handleAddDoctor = (data) => {
     console.log(data);
+    const image = data.image[0];
+    console.log(image);
+
+    const formData = new FormData();
+    formData.append('image', image);
   };
 
   return (
@@ -84,6 +89,22 @@ const AddDoctor = () => {
               <option key={index}>{specialty.name}</option>
             ))}
           </select>
+        </div>
+
+        <div className="form-control w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Photo</span>
+          </label>
+          <input
+            {...register('image', { required: 'Photo is required' })}
+            type="file"
+            accept="image/*"
+            className="input pl-1 w-full max-w-xs"
+          />
+
+          {errors.image && (
+            <p className="text-red-600 text-sm">{errors.image?.message}</p>
+          )}
         </div>
 
         <input
