@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
@@ -9,6 +11,8 @@ const AddDoctor = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const navigate = useNavigate();
 
   const url = 'http://localhost:5000/appointmentSpecialty';
 
@@ -35,7 +39,7 @@ const AddDoctor = () => {
   }
 
   const handleAddDoctor = (data) => {
-    console.log(data);
+    // console.log(data);
     const image = data.image[0];
     console.log(image);
 
@@ -51,9 +55,34 @@ const AddDoctor = () => {
     })
       .then((res) => res.json())
       .then((imageData) => {
-        console.log(imageData);
-        const imageURL = imageData.data.display_url;
-        console.log(imageURL);
+        if (imageData.success) {
+          // console.log(imageData);
+          const imageURL = imageData?.data?.display_url;
+
+          //* Save Doctor information in the Database
+          const doctor = {
+            name: data.name,
+            email: data.email,
+            specialty: data.specialty,
+            image: imageURL,
+          };
+
+          fetch('http://localhost:5000/doctors', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            },
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.acknowledged) {
+                toast.success('Doctor Added Successfully');
+                navigate('/dashboard/managedoctors');
+              }
+            });
+        }
       })
       .catch((error) => {
         console.error('Error:', error);
