@@ -1,5 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Loading from '../../Shared/Loading/Loading';
 
 const AddDoctor = () => {
   const {
@@ -7,6 +9,30 @@ const AddDoctor = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
+
+  const url = 'http://localhost:5000/appointmentSpecialty';
+
+  const {
+    isLoading,
+    isError,
+    data: specialties = [],
+    error,
+  } = useQuery({
+    queryKey: ['appointmentSpecialty'],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  if (isError) {
+    return <div>{error.message}</div>;
+  }
 
   const handleAddDoctor = (data) => {
     console.log(data);
@@ -48,14 +74,15 @@ const AddDoctor = () => {
 
         <div className="form-control w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Specialty</span>
+            <span className="label-text">Select A Specialty</span>
           </label>
-          <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>
-              Select a Specialty
-            </option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
+          <select
+            {...register('specialty', { required: 'This is required' })}
+            className="select select-bordered w-full max-w-xs"
+          >
+            {specialties?.map((specialty, index) => (
+              <option key={index}>{specialty.name}</option>
+            ))}
           </select>
         </div>
 
