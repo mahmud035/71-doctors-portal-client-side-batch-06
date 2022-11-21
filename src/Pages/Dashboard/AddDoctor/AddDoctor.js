@@ -39,8 +39,25 @@ const AddDoctor = () => {
     const image = data.image[0];
     console.log(image);
 
+    //* Upload image to Imgbb Server
     const formData = new FormData();
     formData.append('image', image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_imgbbKey}`;
+
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        console.log(imageData);
+        const imageURL = imageData.data.display_url;
+        console.log(imageURL);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
 
   return (
@@ -118,3 +135,10 @@ const AddDoctor = () => {
 };
 
 export default AddDoctor;
+
+/**
+ * Three places to store images:
+ * 1. Third party image hosting server (ex: imgbb)
+ * 2. File system of your server
+ * 3. mongodb (database)
+ */
