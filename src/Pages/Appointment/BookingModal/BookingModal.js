@@ -7,7 +7,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
   //* treatment is just another name of appointmentOption with _id, name, slots field
   console.log(treatment);
 
-  const { name, slots } = treatment;
+  const { name, price, slots } = treatment;
   const date = format(selectedDate, 'PP');
   const { user } = useContext(AuthContext);
 
@@ -24,6 +24,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
     const booking = {
       appointmentDate: date,
       treatmentName: name,
+      price: price,
       selectedSlot,
       patientName,
       email,
@@ -103,6 +104,14 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
               disabled
               type="email"
               placeholder="Email"
+              className="input input-bordered w-full "
+            />
+
+            <input
+              defaultValue={price}
+              disabled
+              type="number"
+              placeholder="Price"
               className="input input-bordered w-full "
             />
 

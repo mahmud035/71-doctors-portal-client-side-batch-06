@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 
@@ -48,6 +49,7 @@ const MyAppointment = () => {
               <th>Treatment Name</th>
               <th>Booking Date</th>
               <th>Booking Time</th>
+              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +60,17 @@ const MyAppointment = () => {
                 <td>{booking?.treatmentName}</td>
                 <td>{booking?.appointmentDate}</td>
                 <td>{booking?.selectedSlot}</td>
+                <td>
+                  {/* A Conditional Rendering. It is saying if booking.paid is false then show the button.*/}
+                  {!booking?.paid && (
+                    <Link to={`/dashboard/payment/${booking._id}`}>
+                      <button className="btn btn-sm btn-primary">Pay</button>
+                    </Link>
+                  )}
+
+                  {/* Saying if booking.paid is true then show the span. */}
+                  {booking?.paid && <span className="text-primary">Paid</span>}
+                </td>
               </tr>
             ))}
           </tbody>
