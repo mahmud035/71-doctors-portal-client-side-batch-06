@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 
 const AllUsers = () => {
-  const url = 'http://localhost:5000/users';
+  const url = 'https://doctors-portal-server-side.vercel.app/users';
 
   const {
     isLoading,
@@ -31,7 +31,7 @@ const AllUsers = () => {
 
   // console.log(users);
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://doctors-portal-server-side.vercel.app/users/admin/${id}`, {
       method: 'PUT',
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`,

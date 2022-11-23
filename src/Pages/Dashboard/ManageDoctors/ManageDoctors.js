@@ -11,7 +11,7 @@ const ManageDoctors = () => {
     setDeletingDoctor(null);
   };
 
-  const url = 'http://localhost:5000/doctors';
+  const url = 'https://doctors-portal-server-side.vercel.app/doctors';
 
   const {
     isLoading,
@@ -49,12 +49,15 @@ const ManageDoctors = () => {
   const handleDeleteDoctor = (doctor) => {
     console.log(doctor);
 
-    fetch(`http://localhost:5000/doctors/${doctor._id}`, {
-      method: 'DELETE',
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-      },
-    })
+    fetch(
+      `https://doctors-portal-server-side.vercel.app/doctors/${doctor._id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {

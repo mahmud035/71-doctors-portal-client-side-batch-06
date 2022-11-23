@@ -14,7 +14,8 @@ const AddDoctor = () => {
 
   const navigate = useNavigate();
 
-  const url = 'http://localhost:5000/appointmentSpecialty';
+  const url =
+    'https://doctors-portal-server-side.vercel.app/appointmentSpecialty';
 
   const {
     isLoading,
@@ -67,7 +68,7 @@ const AddDoctor = () => {
             image: imageURL,
           };
 
-          fetch('http://localhost:5000/doctors', {
+          fetch('https://doctors-portal-server-side.vercel.app/doctors', {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
