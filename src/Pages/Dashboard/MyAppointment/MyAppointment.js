@@ -69,7 +69,9 @@ const MyAppointment = () => {
                   )}
 
                   {/* Saying if booking.paid is true then show the span. */}
-                  {booking?.paid && <span className="text-primary">Paid</span>}
+                  {booking?.paid && (
+                    <span className="text-green-600 font-bold">Paid</span>
+                  )}
                 </td>
               </tr>
             ))}
